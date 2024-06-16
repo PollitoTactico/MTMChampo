@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MTMChampo.Views.Inicio"
+              Title="" >
+    
+    <ScrollView>
+        <StackLayout BackgroundColor="#82303e" Spacing="25" Padding="30">
+
+            <Label Text=" LOGIN " VerticalOptions="Center" HorizontalOptions="Start" TextColor="White" FontSize="35" FontFamily="Arial" />
+
+            <BoxView BackgroundColor="#E85454" HeightRequest="2" />
+
+            <Label Text="Nombre de usuario:" VerticalOptions="Center" TextColor="White" FontFamily="Arial" />
+            <Entry x:Name="usernameEntry" Placeholder="Ingrese su nombre de usuario"  TextColor="White" />
+
+            <BoxView BackgroundColor="#E85454" HeightRequest="2" />
+
+            <Label Text="Contraseña:" VerticalOptions="Center" TextColor="White" FontFamily="Arial"/>
+            <Entry x:Name="passwordEntry" Placeholder="Ingrese su contraseña" IsPassword="True"  TextColor="White" />
+
+            <BoxView BackgroundColor="#E85454" HeightRequest="2" />
+
+            <Button Text="Iniciar sesión" Command="{Binding LoginCommand}" BackgroundColor=" White" TextColor="#E85454" FontFamily="Arial"/>
+
+            <Button Text="Registrarse" Command="{Binding RegisterCommand}" BackgroundColor="White" TextColor="#E85454" FontFamily="Arial"/>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
