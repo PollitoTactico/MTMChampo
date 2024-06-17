@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MTMChampo.Views.Inicio"
-              Title="" >
-    
+             x:Class="MTMChampo.Views.Register"
+              Title="">
     <ScrollView>
         <StackLayout BackgroundColor="#82303e" Spacing="25" Padding="30">
 
-            <Label Text=" LOGIN " VerticalOptions="Center" HorizontalOptions="Start" TextColor="White" FontSize="35" FontFamily="Arial" />
+            <Label Text=" REGISTER " VerticalOptions="Center" HorizontalOptions="Start" TextColor="White" FontSize="35" FontFamily="Arial" />
 
             <BoxView BackgroundColor="#E85454" HeightRequest="2" />
 
@@ -21,13 +20,12 @@
 
             <BoxView BackgroundColor="#E85454" HeightRequest="2" />
 
-
-            <Button Text="Registrarse" Clicked="RegisterL_Clicked" BackgroundColor="White" TextColor="#E85454" FontFamily="Arial"/>
-
+            <Button Text="Registrarse" Clicked="RegisterR_Clicked" BackgroundColor="White" TextColor="#E85454" FontFamily="Arial"/>
+            <Button Text="Iniciar Sesion" Clicked="InicioR_Clicked" BackgroundColor="White" TextColor="#E85454" FontFamily="Arial"/>
             
-            <Button Text="Iniciar Sesion" Clicked="InicioL_Clicked" BackgroundColor="White" TextColor="#E85454" FontFamily="Arial"/>
+            
+            <Label Text="Si ya tienes una cuenta inicia sesion" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White" FontFamily="Arial"/>
 
-            <Label Text="Si no tienes una cuenta registrate" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White" FontFamily="Arial"/>
         </StackLayout>
     </ScrollView>
 </ContentPage>

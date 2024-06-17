@@ -1,47 +1,40 @@
-using System;
-using System.Threading.Tasks;
+using Microsoft.Maui.Controls;
 using MTMChampo.Models;
-using MTMChampo.Views;
 
 
 namespace MTMChampo.Views
 {
-    public partial class Inicio : ContentPage
+    public partial class Register : ContentPage
     {
-        public Inicio()
+        public Register()
         {
             InitializeComponent();
         }
 
-        private async void InicioL_Clicked(object sender, EventArgs e)
+        private async void RegisterR_Clicked(object sender, EventArgs e)
         {
             string username = usernameEntry.Text;
             string password = passwordEntry.Text;
-
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
                 await DisplayAlert("Esta mal!!", "Por favor ingrese nombre de usuario y contraseña", "OK");
-                return;
+                return; 
             }
-
-           
             bool registrado = UserManager.RegistrarUsuario(username, password);
 
             if (registrado)
             {
                 await DisplayAlert("Registro", "Usuario registrado correctamente", "OK");
-                await Navigation.PushAsync(new Inicio());
+                await Navigation.PopAsync();
             }
             else
             {
                 await DisplayAlert("Esta mal!!", "El usuario ya existe", "OK");
             }
-
         }
-
-        private async void RegisterL_Clicked(object sender, EventArgs e)
+        private async void InicioR_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new Register());
+            await Navigation.PushAsync(new Inicio());
         }
     }
 }
