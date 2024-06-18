@@ -6,26 +6,11 @@ using System.Threading.Tasks;
 
 namespace MTMChampo.Models
 {
-    internal static class UserManager
+    internal class UserManager
     {
-        private static List<Usuario> usuarios = new List<Usuario>();
+      public string username { get; set; }
+        public string password { get; set; }
 
-        public static bool RegistrarUsuario(string nombreUsuario, string contraseña)
-        {
-            
-            if (usuarios.Any(u => u.NombreUsuario == nombreUsuario))
-            {
-                return false; 
-            }
-
-            
-            usuarios.Add(new Usuario(nombreUsuario, contraseña));
-            return true; 
-        }
-
-        public static bool ValidarUsuario(string nombreUsuario, string contraseña)
-        {
-            return usuarios.Any(u => u.NombreUsuario == nombreUsuario && u.Contraseña == contraseña);
-        }
+        public static List<UserManager> RegisteredUsers { get; set; } = new List<UserManager>();
     }
 }

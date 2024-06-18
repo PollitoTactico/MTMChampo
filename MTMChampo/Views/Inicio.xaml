@@ -24,7 +24,7 @@
 
             <Button Text="Registrarse" Clicked="RegisterL_Clicked" BackgroundColor="White" TextColor="#E85454" FontFamily="Arial"/>
 
-            
+
             <Button Text="Iniciar Sesion" Clicked="InicioL_Clicked" BackgroundColor="White" TextColor="#E85454" FontFamily="Arial"/>
 
             <Label Text="Si no tienes una cuenta registrate" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White" FontFamily="Arial"/>

@@ -1,7 +1,5 @@
-using System;
-using System.Threading.Tasks;
 using MTMChampo.Models;
-using MTMChampo.Views;
+using System;
 
 
 namespace MTMChampo.Views
@@ -12,36 +10,33 @@ namespace MTMChampo.Views
         {
             InitializeComponent();
         }
+        private async void RegisterL_Clicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new Register());
+        }
 
         private async void InicioL_Clicked(object sender, EventArgs e)
         {
             string username = usernameEntry.Text;
             string password = passwordEntry.Text;
 
-            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                await DisplayAlert("Esta mal!!", "Por favor ingrese nombre de usuario y contraseña", "OK");
+                await DisplayAlert("Error", "Todos los campos son obligatorios.", "OK");
                 return;
             }
 
-           
-            bool registrado = UserManager.RegistrarUsuario(username, password);
+            var user = UserManager.RegisteredUsers.FirstOrDefault(u => u.username == username && u.password == password);
 
-            if (registrado)
+            if (user == null)
             {
-                await DisplayAlert("Registro", "Usuario registrado correctamente", "OK");
-                await Navigation.PushAsync(new Inicio());
-            }
-            else
-            {
-                await DisplayAlert("Esta mal!!", "El usuario ya existe", "OK");
+                await DisplayAlert("Error", "Usuario o contraseña incorrectos.", "OK");
+                return;
             }
 
+            await DisplayAlert("Éxito", "Inicio de sesión exitoso.", "OK");
+            // Navegar a la siguiente página o acción, por ahora solo mostramos mensaje
         }
 
-        private async void RegisterL_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new Register());
-        }
     }
 }
