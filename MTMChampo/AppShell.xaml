@@ -9,8 +9,8 @@
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:Register}"
-        Route="Register" />
+        ContentTemplate="{DataTemplate local:HomeH}"
+        Route="HomeH" />
     
 
 </Shell>

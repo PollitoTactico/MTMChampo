@@ -17,7 +17,7 @@
         <Label Text="Tipo de Cuenta:" FontSize="Medium" />
         <Entry x:Name="tipoCuentaEntry" Placeholder="Ingrese el tipo de cuenta"  />
 
-        <Button Text="Guardar Cambios" Clicked="GuardarCambios_Clicked" BackgroundColor="#E85454" TextColor="White" />
+        <Button Text="Guardar Cambios" Clicked="GuardarCambios_Clicked" BackgroundColor="White" TextColor="#E85454" FontFamily="Arial" />
 
     </StackLayout>
 </ContentPage>

@@ -36,6 +36,8 @@ namespace MTMChampo.Views
             await DisplayAlert("Éxito", "Cambios guardados exitosamente.", "OK");
 
             
+            MessagingCenter.Send(this, "ActualizarCuentas");
+
             await Navigation.PopAsync();
         }
         private async void EditarCuentaBancaria(CuentaBanco cuenta)

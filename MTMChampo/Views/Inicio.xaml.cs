@@ -12,6 +12,7 @@ namespace MTMChampo.Views
         }
         private async void RegisterL_Clicked(object sender, EventArgs e)
         {
+           
             await Navigation.PushAsync(new Register());
         }
 
@@ -36,7 +37,9 @@ namespace MTMChampo.Views
 
         await DisplayAlert("Éxito", "Inicio de sesión exitoso.", "OK");
         await Navigation.PushAsync(new CrearCuentasPage());
-        }
 
+            
+        }
+       
     }
 }

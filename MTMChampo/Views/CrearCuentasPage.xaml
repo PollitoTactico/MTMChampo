@@ -3,10 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MTMChampo.Views.CrearCuentasPage"
              Title="">
-   
+
     <ScrollView>
         <StackLayout BackgroundColor="#82303e" Spacing="25" Padding="30">
-            <Label Text="Crear Cuenta Bancaria" VerticalOptions="Center" HorizontalOptions="Start" TextColor="White" FontSize="35" FontFamily="Arial" />
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+               
+                <Image Source="bank.png" HeightRequest="45" WidthRequest="45" Grid.Column="0" VerticalOptions="Center"/>
+                <Label Text=" Crear Cuenta Bancaria " Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White" FontSize="25" FontFamily="Arial" />
+            </Grid>
             <BoxView BackgroundColor="#E85454" HeightRequest="2" />
 
             <Label Text="Número de Cuenta:" VerticalOptions="Center" TextColor="White" FontFamily="Arial" />

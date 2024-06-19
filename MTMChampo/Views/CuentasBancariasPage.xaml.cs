@@ -7,8 +7,13 @@ public partial class CuentasBancariasPage : ContentPage
 	public CuentasBancariasPage()
 	{
 		InitializeComponent();
-        CargarCuentas();    
-	}
+        CargarCuentas();
+
+        MessagingCenter.Subscribe<EditarCuentaPage>(this, "ActualizarCuentas", (sender) =>
+        {
+            CargarCuentas();
+        });
+    }
     private async void CargarCuentas()
     {
         List<CuentaBanco> cuentas = await BankManager.CargarCuentasAsync();

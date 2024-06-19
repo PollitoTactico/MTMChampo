@@ -29,12 +29,14 @@ namespace MTMChampo.Views
 
             UserManager.UsuariosRegistrados.Add(new UserManager { NombreUsuario = username, Contrasena = password });
             await DisplayAlert("Éxito", "Registro exitoso.", "OK");
+            
             await Navigation.PushAsync(new Inicio());
         }
 
         private async void InicioR_Clicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new Inicio());
+            
         }
 
     }
