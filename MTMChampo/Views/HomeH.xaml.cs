@@ -15,4 +15,9 @@ public partial class HomeH : ContentPage
     {
         await Navigation.PushAsync(new Register());
     }
+
+    Image image = new Image
+    {
+        Source = ImageSource.FromFile("huevos.png")
+    };
 }

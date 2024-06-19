@@ -9,9 +9,23 @@ public partial class CuentasBancariasPage : ContentPage
 		InitializeComponent();
         CargarCuentas();
 
-        MessagingCenter.Subscribe<EditarCuentaPage>(this, "ActualizarCuentas", (sender) =>
+        MessagingCenter.Subscribe<EditarCuentaPage, CuentaBanco>(this, "ActualizarCuentas", (sender, cuentaActualizada) =>
         {
-            CargarCuentas();
+            
+            var cuentaExistente = BankManager.Cuentas.FirstOrDefault(c => c.Id == cuentaActualizada.Id);
+            if (cuentaExistente != null)
+            {
+                cuentaExistente.NumeroCuenta = cuentaActualizada.NumeroCuenta;
+                cuentaExistente.NombreTitular = cuentaActualizada.NombreTitular;
+                cuentaExistente.Saldo = cuentaActualizada.Saldo;
+                cuentaExistente.TipoCuenta = cuentaActualizada.TipoCuenta;
+            }
+            else
+            {
+                BankManager.Cuentas.Add(cuentaActualizada);
+            }
+            cuentasCollectionView.ItemsSource = null;
+            cuentasCollectionView.ItemsSource = BankManager.Cuentas;
         });
     }
     private async void CargarCuentas()
@@ -25,7 +39,7 @@ public partial class CuentasBancariasPage : ContentPage
         if (cuenta != null)
         {
             
-            await Navigation.PushAsync(new EditarCuentaPage(cuenta));
+            await Navigation.PushAsync(new EditarCuentaPage(cuenta.Id.ToString()));
         }
     }
 
@@ -41,7 +55,7 @@ public partial class CuentasBancariasPage : ContentPage
                 await BankManager.GuardarCuentasAsync();
                 await DisplayAlert("Éxito", "Cuenta eliminada exitosamente.", "OK");
                 CargarCuentas(); 
-            }
+            }   
         }
     }
 }

@@ -9,7 +9,7 @@
 
             <Label Text=" BIENVENIDO A MTMCHAMPO " Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White" FontSize="24" FontFamily="Poppins" />
 
-            <Image Source="huevos.png"/>
+            <Image x:Name="image" Source="huevos.png"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />

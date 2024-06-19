@@ -45,5 +45,16 @@ namespace MTMChampo.Models
         {
             return Cuentas.Any(c => c.NumeroCuenta == numeroCuenta);
         }
+        public static void ActualizarCuenta(CuentaBanco cuentaActualizada)
+        {
+            var cuentaExistente = Cuentas.FirstOrDefault(c => c.Id == cuentaActualizada.Id);
+            if (cuentaExistente != null)
+            {
+                cuentaExistente.NumeroCuenta = cuentaActualizada.NumeroCuenta;
+                cuentaExistente.NombreTitular = cuentaActualizada.NombreTitular;
+                cuentaExistente.Saldo = cuentaActualizada.Saldo;
+                cuentaExistente.TipoCuenta = cuentaActualizada.TipoCuenta;
+            }
+        }
     }
 }
