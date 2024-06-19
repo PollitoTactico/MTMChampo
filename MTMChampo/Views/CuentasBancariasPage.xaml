@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MTMChampo.Views.CuentasBancariasPage"
+             Title="">
+    <ScrollView>
+        <StackLayout BackgroundColor="#82303e" Spacing="25" Padding="30">
+            <Label Text="Cuentas Bancarias" VerticalOptions="Center" HorizontalOptions="Start" TextColor="White" FontSize="35" FontFamily="Arial" />
+            <BoxView BackgroundColor="#E85454" HeightRequest="2" />
+
+            <CollectionView x:Name="cuentasCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Frame Padding="10" Margin="10" CornerRadius="15" BackgroundColor="#6a041a" HasShadow="True" BorderColor="#FFFFFF">
+                            <StackLayout Spacing="10">
+                                <Label Text="{Binding NumeroCuenta}" TextColor="White" FontSize="Medium" FontFamily="Arial"/>
+                                <Label Text="{Binding NombreTitular}" TextColor="White" FontSize="Small" FontFamily="Arial"/>
+                                <Label Text="{Binding Saldo, StringFormat='Saldo: {0:C}'}" TextColor="White" FontSize="Small" FontFamily="Arial"/>
+                                <Label Text="{Binding TipoCuenta}" TextColor="White" FontSize="Small" FontFamily="Arial" />
+                                <Button Text="Editar" Clicked="Editar_Clicked" CommandParameter="{Binding .}" BackgroundColor="White" TextColor="#E85454" FontFamily="Arial" />
+                                <Button Text="Eliminar" Clicked="Eliminar_Clicked" CommandParameter="{Binding .}" BackgroundColor="White" TextColor="#E85454" FontFamily="Arial" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

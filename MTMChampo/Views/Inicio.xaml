@@ -7,7 +7,16 @@
     <ScrollView>
         <StackLayout BackgroundColor="#82303e" Spacing="25" Padding="30">
 
-            <Label Text=" LOGIN " VerticalOptions="Center" HorizontalOptions="Start" TextColor="White" FontSize="35" FontFamily="Arial" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="userpa.png" HeightRequest="45" WidthRequest="45" Grid.Column="0" VerticalOptions="Center"/>
+
+                <Label Text=" LOGIN " Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Start" TextColor="White" FontSize="35" FontFamily="Poppins" />
+            </Grid>
 
             <BoxView BackgroundColor="#E85454" HeightRequest="2" />
 

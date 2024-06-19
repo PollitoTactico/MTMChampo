@@ -17,17 +17,17 @@ namespace MTMChampo.Views
 
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
             {
-                await DisplayAlert("Error", "Todos los campos son obligatorios.", "OK");
+                await DisplayAlert("Esta mal!!!", "Todos los campos son obligatorios.", "OK");
                 return;
             }
 
-            if (UserManager.RegisteredUsers.Any(u => u.username == username))
+            if (UserManager.UsuariosRegistrados.Any(u => u.NombreUsuario == username))
             {
-                await DisplayAlert("Error", "El usuario ya está registrado.", "OK");
+                await DisplayAlert("Esta mal!!!", "El usuario ya está registrado.", "OK");
                 return;
             }
 
-            UserManager.RegisteredUsers.Add(new UserManager { username = username, password = password });
+            UserManager.UsuariosRegistrados.Add(new UserManager { NombreUsuario = username, Contrasena = password });
             await DisplayAlert("Éxito", "Registro exitoso.", "OK");
             await Navigation.PushAsync(new Inicio());
         }
