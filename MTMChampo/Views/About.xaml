@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MTMChampo.Views"
+             x:Class="MTMChampo.Views.About"
+             Title="About">
+
+    <ContentPage.Content>
+        <FlexLayout Direction="Column" Background="#82303e">
+            <StackLayout BackgroundColor="#82303e" Spacing="25" Padding="30">
+                <Label Text="About" VerticalOptions="Center" HorizontalOptions="Start" TextColor="White" FontSize="35" FontFamily="Arial" />
+                
+                <BoxView BackgroundColor="#E85454" HeightRequest="2" />
+                
+                
+                <VerticalStackLayout Padding="10" FlexLayout.Basis="400">
+                    <Label Text="Información sobre la aplicación..." TextColor="White" FontSize="20"/>
+                    <Image Source="huevos.png"/>
+                    <Label Text="Nada..." TextColor="White" FontSize="20"/>
+                </VerticalStackLayout>
+            </StackLayout>
+        </FlexLayout>
+    </ContentPage.Content>
+</ContentPage>

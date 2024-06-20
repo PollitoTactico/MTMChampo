@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,18 +7,22 @@ using System.Threading.Tasks;
 
 namespace MTMChampo.Models
 {
-    internal class CuentaBanco
+    public class CuentaBanco
     {
-        public Guid Id { get; set; }
+        [PrimaryKey]
+        [AutoIncrement]
+        [Column("id")]
+        public int Id { get; set; }
+        [Column("numCuenta")]
         public string NumeroCuenta { get; set; }
+        [Column("nombreTitular")]
         public string NombreTitular { get; set; }
+        [Column("saldo")]
         public decimal Saldo { get; set; }
+        [Column("tipoCuenta")]
         public string TipoCuenta { get; set; }
 
-        public CuentaBanco()
-        {
-            Id = Guid.NewGuid();
-        }
+        
     }
     
 }

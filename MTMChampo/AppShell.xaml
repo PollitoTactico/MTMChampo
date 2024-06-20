@@ -7,10 +7,17 @@
     Shell.FlyoutBehavior="Disabled"
     Title="MTMChampo">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:HomeH}"
-        Route="HomeH" />
-    
+    <ShellContent Title="Home" ContentTemplate="{DataTemplate local:HomeH}" Route="HomeH" />
+    <ShellContent Route="login" ContentTemplate="{DataTemplate local:Inicio}" />
+    <ShellContent Route="register" ContentTemplate="{DataTemplate local:Register}" />
+
+    <TabBar>
+        
+        <ShellContent Title="Cuentas" Icon="bank.png" ContentTemplate="{DataTemplate local:CuentasBancariasPage}" />
+
+        
+        <ShellContent Title="About" Icon="bank.png" ContentTemplate="{DataTemplate local:About}" />
+    </TabBar>
+
 
 </Shell>

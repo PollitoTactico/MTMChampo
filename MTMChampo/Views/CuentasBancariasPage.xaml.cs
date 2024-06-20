@@ -1,61 +1,94 @@
 using MTMChampo.Models;
-
+using MTMChampo;
+using System.Diagnostics;
 namespace MTMChampo.Views;
 
 public partial class CuentasBancariasPage : ContentPage
 {
-	public CuentasBancariasPage()
+    private readonly LocalDbService _dbService;
+    
+    private int _editCuentaBancoId;
+	public CuentasBancariasPage(LocalDbService dbService)
 	{
 		InitializeComponent();
-        CargarCuentas();
-
-        MessagingCenter.Subscribe<EditarCuentaPage, CuentaBanco>(this, "ActualizarCuentas", (sender, cuentaActualizada) =>
+        _dbService = dbService;
+        Task.Run(async() => ListView.ItemsSource = await _dbService.GetCustomersAsync());    
+    }
+    private async void saveButton_Clicked(object sender, EventArgs e)
+    {
+        decimal saldo;
+        if (!decimal.TryParse(saldoEntryField.Text, out saldo))
         {
-            
-            var cuentaExistente = BankManager.Cuentas.FirstOrDefault(c => c.Id == cuentaActualizada.Id);
-            if (cuentaExistente != null)
+            await DisplayAlert("Error", "Saldo debe ser un número", "OK");
+            return;
+        }
+
+        try
+        {
+            if (_editCuentaBancoId == 0)
             {
-                cuentaExistente.NumeroCuenta = cuentaActualizada.NumeroCuenta;
-                cuentaExistente.NombreTitular = cuentaActualizada.NombreTitular;
-                cuentaExistente.Saldo = cuentaActualizada.Saldo;
-                cuentaExistente.TipoCuenta = cuentaActualizada.TipoCuenta;
+                await _dbService.Create(new CuentaBanco
+                {
+                    NumeroCuenta = cuentaEntryField.Text,
+                    NombreTitular = nombreEntryField.Text,
+                    Saldo = saldo,
+                    TipoCuenta = tipoEntryField.Text
+                });
             }
             else
             {
-                BankManager.Cuentas.Add(cuentaActualizada);
+                await _dbService.Update(new CuentaBanco
+                {
+                    Id = _editCuentaBancoId,
+                    NumeroCuenta = cuentaEntryField.Text,
+                    NombreTitular = nombreEntryField.Text,
+                    Saldo = saldo,
+                    TipoCuenta = tipoEntryField.Text
+                });
+
+                _editCuentaBancoId = 0;
             }
-            cuentasCollectionView.ItemsSource = null;
-            cuentasCollectionView.ItemsSource = BankManager.Cuentas;
-        });
-    }
-    private async void CargarCuentas()
-    {
-        List<CuentaBanco> cuentas = await BankManager.CargarCuentasAsync();
-        cuentasCollectionView.ItemsSource = cuentas;
-    }
-    private async void Editar_Clicked(object sender, EventArgs e)
-    {
-        var cuenta = (sender as Button)?.CommandParameter as CuentaBanco;
-        if (cuenta != null)
+            cuentaEntryField.Text = string.Empty;
+            nombreEntryField.Text = string.Empty;
+            saldoEntryField.Text = string.Empty;
+            tipoEntryField.Text = string.Empty;
+
+            await Device.InvokeOnMainThreadAsync(async () =>
+            {
+                ListView.ItemsSource = await _dbService.GetCustomersAsync();
+            });
+        }
+        catch (Exception ex)
         {
-            
-            await Navigation.PushAsync(new EditarCuentaPage(cuenta.Id.ToString()));
+            Debug.WriteLine($"Error al guardar cuenta bancaria: {ex.Message}");
+            await DisplayAlert("Error", "Ocurrió un error al guardar la cuenta bancaria", "OK");
         }
     }
 
-    private async void Eliminar_Clicked(object sender, EventArgs e)
-    {
-        var cuenta = (sender as Button)?.CommandParameter as CuentaBanco;
-        if (cuenta != null)
+        private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
-            bool confirmar = await DisplayAlert("Confirmación", $"¿Estás seguro de eliminar la cuenta {cuenta.NumeroCuenta}?", "Sí", "No");
-            if (confirmar)
+        var cuentaBanco = (CuentaBanco)e.Item;
+        var action = await DisplayActionSheet("Actions", "Cancel", null, "Edit", "Delete");
+
+            switch (action)
             {
-                BankManager.Cuentas.Remove(cuenta);
-                await BankManager.GuardarCuentasAsync();
-                await DisplayAlert("Éxito", "Cuenta eliminada exitosamente.", "OK");
-                CargarCuentas(); 
-            }   
+                case "Edit":
+                _editCuentaBancoId = cuentaBanco.Id;
+                cuentaEntryField.Text = cuentaBanco.NumeroCuenta;
+                nombreEntryField.Text = cuentaBanco.NombreTitular;
+                saldoEntryField.Text = cuentaBanco.Saldo.ToString();
+                tipoEntryField.Text = cuentaBanco.TipoCuenta;
+                    break;
+
+                case "Delete":
+                await _dbService.Delete(cuentaBanco);
+                ListView.ItemsSource = await _dbService.GetCustomersAsync();
+                    break;
+            }
         }
+    private async void About_Clicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new About()); 
     }
+
 }

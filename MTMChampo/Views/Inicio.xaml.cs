@@ -36,7 +36,7 @@ namespace MTMChampo.Views
         }
 
         await DisplayAlert("Éxito", "Inicio de sesión exitoso.", "OK");
-        await Navigation.PushAsync(new CrearCuentasPage());
+        await Navigation.PushAsync(new CuentasBancariasPage(App.DbService));
 
             
         }

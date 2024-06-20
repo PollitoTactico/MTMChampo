@@ -1,30 +1,45 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MTMChampo.Views"
              x:Class="MTMChampo.Views.CuentasBancariasPage"
              Title="">
-    <ScrollView>
-        <StackLayout BackgroundColor="#82303e" Spacing="25" Padding="30">
-            <Label Text="Cuentas Bancarias" VerticalOptions="Center" HorizontalOptions="Start" TextColor="White" FontSize="35" FontFamily="Arial" />
-            <BoxView BackgroundColor="#E85454" HeightRequest="2" />
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="About" Clicked="About_Clicked" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <FlexLayout Direction="Column">
+            <StackLayout BackgroundColor="#82303e" Spacing="25" Padding="30">
+                <Label Text="Cuentas Bancarias" VerticalOptions="Center" HorizontalOptions="Start" TextColor="White" FontSize="35" FontFamily="Arial" />
+                <BoxView BackgroundColor="#E85454" HeightRequest="2" />
+                <Label Text="Crea tu Cuenta:" VerticalOptions="Center" HorizontalOptions="Start" TextColor="White" FontSize="22" FontFamily="Arial" />
+                <VerticalStackLayout Padding="10" FlexLayout.Basis="400">
+                    <Entry x:Name="cuentaEntryField" Placeholder="Numero Cuenta:" />
+                    <Entry x:Name="nombreEntryField" Placeholder="Nombre titular" />
+                    <Entry x:Name="saldoEntryField" Placeholder="Saldo" Keyboard="Numeric"/>
+                    <Entry x:Name="tipoEntryField" Placeholder="Tipo de Cuenta" />
+                    <Button x:Name="saveButton"  Text="Guardar" Clicked="saveButton_Clicked" TextColor="#E85454" BackgroundColor="White"/>
+                </VerticalStackLayout>
+                <ListView x:Name="ListView" FlexLayout.Grow="1" HasUnevenRows="True" ItemTapped="ListView_ItemTapped" Background="#82303e">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Frame BackgroundColor="#A05252" CornerRadius="10" Padding="10" Margin="10" BorderColor="White">
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding NumeroCuenta}" TextColor="White" Margin="5" FontSize="20"/>
+                                        <Label Text="{Binding NombreTitular}" TextColor="White" Margin="5" FontSize="20"/>
+                                        <Label Text="{Binding Saldo, StringFormat='${0}'}" TextColor="White" Margin="5" FontSize="20"/>
+                                        <Label Text="{Binding TipoCuenta}" TextColor="White" Margin="5" FontSize="20"/>
+                                    </VerticalStackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
 
-            <CollectionView x:Name="cuentasCollectionView">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-
-                        <Frame Padding="10" Margin="10" CornerRadius="15" BackgroundColor="#6a041a" HasShadow="True" BorderColor="#FFFFFF">
-                            <StackLayout Spacing="10">
-                                <Label Text="{Binding NumeroCuenta}" TextColor="White" FontSize="Medium" FontFamily="Arial"/>
-                                <Label Text="{Binding NombreTitular}" TextColor="White" FontSize="Small" FontFamily="Arial"/>
-                                <Label Text="{Binding Saldo, StringFormat='Saldo: {0:C}'}" TextColor="White" FontSize="Small" FontFamily="Arial"/>
-                                <Label Text="{Binding TipoCuenta}" TextColor="White" FontSize="Small" FontFamily="Arial" />
-                                <Button Text="Editar" Clicked="Editar_Clicked" CommandParameter="{Binding .}" BackgroundColor="White" TextColor="#E85454" FontFamily="Arial" />
-                                <Button Text="Eliminar" Clicked="Eliminar_Clicked" CommandParameter="{Binding .}" BackgroundColor="White" TextColor="#E85454" FontFamily="Arial" />
-                            </StackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </StackLayout>
-    </ScrollView>
+            <!-- Botón para navegar a la página CrearCuentaPage -->
+            <Button Text="Crear Nueva Cuenta" Clicked="About_Clicked" HorizontalOptions="Center" VerticalOptions="End" Margin="20"/>
+        </FlexLayout>
+    </ContentPage.Content>
 </ContentPage>

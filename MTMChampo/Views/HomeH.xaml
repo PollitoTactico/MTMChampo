@@ -3,13 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MTMChampo.Views.HomeH"
              Title="">
+    
+    
 
     <ScrollView>
         <StackLayout BackgroundColor="#82303e" Spacing="25" Padding="30">
 
             <Label Text=" BIENVENIDO A MTMCHAMPO " Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" TextColor="White" FontSize="24" FontFamily="Poppins" />
 
-            <Image x:Name="image" Source="huevos.png"/>
+            <Image Source="huevos.png"/>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
